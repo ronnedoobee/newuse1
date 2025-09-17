@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newuse</title>
+    <link rel="stylesheet" href="../static/css/paginainicial.css">
+    <link rel="stylesheet" href="../static/css/cadastraritem.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    
+
+    <div class="cabecalho">
+
+        <a href="https://www.google.com" target="_blank">
+            <img src="../static/imagens/MENULATERAL.png" style="margin-left: 1%;">
+        </a>
+        <img src="../static/imagens/NEWUSE1.png" style="margin-left: 10%;">
+
+        <form class="pesquisaform" action="/pesquisar" method="post">
+            <input type="text" id="pesquisa" placeholder="Procurar produto...">
+            <button type="submit">procurar</button>
+        </form>
+
+    </div>
+
+    <a href="/"> < Página inicial</a>
+    <br>
+    <br>
+    <div class="container-blocos">
+    <div class="inicio">
+    <h1 style="text-align: center; margin-bottom: 2px;" >Escolha que tipo de item deseja cadastrar: </h1>
+    </div>
+
+    <div class="corpo">
+
+        <div class="item-bloco" style="">
+            <h2>Roupa</h2>
+            <form method="post" action="/cadastrarroupa">
+                <img src="../static/imagens/roupaitem.png">
+                <button type="submit">Cadastrar roupa</button>
+            </form>
+
+        </div>
+        <div class="item-bloco" style="">
+            <h2>Sapato</h2>
+            <form method="post" action="/cadastrarcalcado">
+                <img src="../static/imagens/tenisitem.png">
+                <button formaction="/cadastrarcalcado" type="submit">Cadastrar calçado</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

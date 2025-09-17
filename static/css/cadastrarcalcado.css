@@ -1,0 +1,53 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fredoka One', cursive;
+}
+
+body, html {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* CabeĆ§alho fixo no topo */
+.cabecalho {
+  height: 6vh;
+  display: flex;
+  background-color: rgb(31, 30, 41);
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+}
+
+.grid-blocos {
+  display: grid;
+  grid-template-columns: repeat(3, 200px); /* 3 colunas com largura fixa */
+  grid-template-rows: repeat(2, 150px);    /* 2 linhas com altura fixa */
+  gap: 150px;
+}
+
+/* Container dos blocos */
+.container-blocos {
+  height: 94vh;
+  display: grid;
+  justify-content: center; /* centraliza na horizontal */
+  align-content: center;   /* centraliza na vertical */
+}
+
+/* Cada bloco */
+.item-bloco {
+  display: flex;
+  background-color: #bbf2f4;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: rgb(31, 30, 41);
+  border: solid 5px #bbf2f4;
+  border-radius: 10px;
+  width: 300px;
+  height: 250px;
+  padding: 10px;
+  font-size: 23px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}

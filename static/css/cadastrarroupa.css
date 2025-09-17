@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Adigiana Toybox", sans-serif;
+}
+
+body, html {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Cabeçalho fixo no topo */
+.cabecalho {
+  height: 6vh;
+  display: flex;
+  background-color: rgb(31, 30, 41);
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+}
+
+.grid-blocos {
+  display: grid;
+  grid-template-columns: repeat(3, 200px); /* 3 colunas com largura fixa */
+  grid-template-rows: repeat(2, 150px);    /* 2 linhas com altura fixa */
+  gap: 100px;
+}
+
+/* Container dos blocos */
+.container-blocos {
+  height: 94vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cada bloco */
+.item-bloco {
+  color: #bbf2f4;
+  background-color: rgb(31, 30, 41);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: solid 5px;
+  border-radius: 10px;
+  width: 250px;
+  height: 200px;
+  padding: 10px;
+
+}

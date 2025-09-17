@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fredoka One', cursive;
+}
+
+body, html {
+  height: 100vh;
+  width: 100vw;
+
+}
+.container-blocos {
+  height: 94vh;
+  display: grid;
+  justify-content: center; /* centraliza na horizontal */
+  align-content: center;   /* centraliza na vertical */
+}
+
+.inicio {
+    margin-top: 2%;
+    margin-left: 1%;
+    width: 50%;
+    height: 10%;
+    background-color: rgb(31, 30, 41);
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    color: white;
+    justify-content: center; /* centraliza na horizontal */
+    align-content: center;
+}
+
+.corpo{
+
+    margin-left: 9.5%;
+    justify-content: center;
+    width: 80%;
+    display: flex;
+}
+
+.corpo img{
+    max-width: 20vw;
+    max-height:20vh;
+    width: 20vw;
+    height:20vh;
+}
+
+.item-bloco {
+    display: flex;
+    background-color: #bbf2f4;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: rgb(31, 30, 41);
+    border: solid 5px #bbf2f4;
+    border-radius: 10px;
+    width: 550px;
+    height: 550px;
+    padding: 10px;
+    font-size: 23px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+    margin-right: 40px;
+    justify-content: center; /* centraliza na horizontal */
+    align-content: center;
+    color white;
+}
+
+.item-bloco form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-bloco img {
+    margin-bottom: 10px;
+}
+
+
+
+

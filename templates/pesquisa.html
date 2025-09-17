@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NEWUSE</title>
+
+</head>
+<body>
+
+    <div class="cabecalho">
+
+        <a href="https://www.google.com" target="_blank">
+            <img src="../static/imagens/MENULATERAL.png" style="margin-left: 1%;">
+        </a>
+        <img src="../static/imagens/NEWUSE1.png" style="margin-left: 10%;">
+
+        <form class="pesquisaform" action="/pesquisar" method="post">
+            <input type="text" id="pesquisa" name="pesquisar" placeholder="Procurar produto...">
+            <button type="submit">procurar</button>
+        </form>
+
+    </div>
+
+    <h1>Resultados:</h1>
+        {% for item in lista %}
+            <p>{{item[0]}}</p>
+        {% endfor %}
+
+
+
+</body>
+</html>

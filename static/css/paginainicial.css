@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body, html {
+  height: 100vh;
+  width: 100vw;
+}
+
+.cabecalho {
+    height: 6vh;
+    display: flex;
+    background-color: rgb(31, 30, 41);
+    align-items: center;
+}
+
+.cabecalho img{
+    height: 50%;
+}
+
+.cabecalho a{
+    margin-left: 1%;
+    margin-top: 1.5%;
+    height: 100%;
+}
+
+#pesquisa {
+  width: 300%;
+  padding: 15px 20px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  margin-left: 130%;
+}

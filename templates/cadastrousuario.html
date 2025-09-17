@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/cadastrousuario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <div class="cadastro-bloco">
+        <div class="retorno">
+            <a href="/paginainicial"> < Página inicial</a>
+        </div>
+    <br>
+    <br>
+    <h2> Cadastro </h2>
+        <form method="post" action="/cadastrar">
+            <p>Usuário:</p>
+            <input type="text" name="usuario" placeholder="Insira o usuário...">
+            <br>
+            <br>
+            <p>Senha:</p>
+            <input type="password" name="senha">
+            <button type="submit">Cadastrar</button>
+            <br>
+            <br>
+             <select id="tipo_user" name="tipouser">
+              <option value="cliente">Cliente</option>
+              <option value="vendedor">Vendedor</option>
+            </select>
+            <br>
+            <p>{{saida}}</p>
+            <p>Já tem uma conta? <br> <a href="/login">Faça login!</a></p>
+        </form>
+    </div>
+
+</body>
+</html>

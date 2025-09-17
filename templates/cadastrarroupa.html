@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newuse</title>
+    <link rel="stylesheet" href="../static/css/paginainicial.css">
+    <link rel="stylesheet" href="../static/css/cadastrarroupa.css">
+</head>
+<body>
+    <div class="cabecalho">
+
+        <a href="https://www.google.com" target="_blank">
+            <img src="../static/imagens/MENULATERAL.png" style="margin-left: 1%;">
+        </a>
+        <img src="../static/imagens/NEWUSE1.png" style="margin-left: 10%;">
+
+        <form class="pesquisaform" action="/pesquisar" method="post">
+            <input type="text" id="pesquisa" placeholder="Procurar produto...">
+        </form>
+
+    </div>
+
+    <a href="/cadastraritem"> < Cadastrar Item</a>
+    <br>
+    <br>
+    <div class="container-blocos">
+        <div class="grid-blocos">
+        <div class="item-bloco">
+            <form action="cadastrarroupa" method="post">
+                <a>Nome da peça: </a>
+                <input name="nomeroupa" type="text" >
+        </div>
+        <div class="item-bloco">
+                <a>Genero:</a>
+                <select id="genero" name="genero">
+                  <option value="masculino">Masculino</option>
+                  <option value="feminino">Feminino</option>
+                  <option value="unisex">Unisex</option>
+                </select>
+        </div>
+        <div class="item-bloco">
+                <a>Categoria:</a>
+                <select id="categoria" name="categoria">
+                  <option value="camisa">Camisa</option>
+                  <option value="calca">Calça</option>
+                  <option value="short">Short</option>
+                  <option value="cueca">Cueca</option>
+                  <option value="calcinha">Calcinha</option>
+                  <option value="moletom">Moletom</option>
+                </select>
+        </div>
+        <div class="item-bloco">
+                <a>Tamanho:</a>
+                    <select id="tamanho" name="tamanho">
+                        <option value="G">G</option>
+                        <option value="M">M</option>
+                        <option value="P">P</option>
+                    </select>
+        </div>
+            
+        <div class="item-bloco">
+                <a>Preço: </a>
+                <input type="number" name="preco">
+        </div>
+                
+        <div class="item-bloco">
+                <a>Descrição: </a>
+                <input type="text" name="descricao" placeholder="Escreva as especificações da roupa...">
+                <button type="submit">Cadastrar roupa</button>
+
+            </form>
+            <br>
+            <br>
+            {{erro}}
+            {{retorno}}
+        </div>
+       </div>
+    </div>
+
+</body>
+</html>
