@@ -168,7 +168,7 @@ def pesquisar():
         for calcado in calcados:
             if pesquisar.lower() == calcado[0].lower():
                 pesquisas.append(calcado)
-    print(f"Resultados encontrados: {pesquisas}")
+    print(f"Resultados: {pesquisas}")
     return render_template('pesquisa.html', lista = pesquisas)
 
 
