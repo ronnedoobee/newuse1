@@ -1,0 +1,63 @@
+body, html {
+  height: 100vh;
+  width: 100vw;
+}
+
+.cabecalho {
+  height: 6vh;
+  display: flex;
+  background-color: rgb(31, 30, 41);
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+}
+
+.cabecalho img{
+    height: 50%;
+}
+
+.cabecalho a{
+    margin-left: 1%;
+    margin-top: 1.5%;
+    height: 100%;
+}
+
+#pesquisa {
+  width: 300%;
+  padding: 15px 20px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  margin-left: 130%;
+}
+
+.itemmeu {
+    width:400px;
+    height:200px;
+    border: solid 15px #bbf2f4;
+    border-radius: 20px;
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+
+}
+
+.itemmeu img{
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 20px;
+    width: 150px;
+    height: 150px;
+}
+
+.texto {
+    margin-top: 25px;
+    width: 150px;
+    height: 150px;
+    display: grid;
+}
+
+.texto p{
+    font-size: 30px;
+}

@@ -2,8 +2,8 @@ from flask import *
 
 app = Flask(__name__)
 
-roupas = [['Cuecão', 'cueca', 'G', '12', 'éssa bvosta ai']]
-calcados = [['Tênis', 'branco', 120.00],['Chinelo', 'verde', 20.00]]
+roupas = []
+calcados = []
 vendedores = [['rome', '123']]
 clientes = []
 logado = False
@@ -171,6 +171,20 @@ def pesquisar():
     print(f"Resultados: {pesquisas}")
     return render_template('pesquisa.html', lista = pesquisas)
 
+@app.route('/meusitens', methods=['post'])
+def meus_itens():
+    meusitens = []
+
+    for roupa in roupas:
+        if roupa[5] == nomevendedor:
+            meusitens.append(roupa)
+
+    for calcado in calcados:
+        if calcado[5] == nomevendedor:
+            meusitens.append(calcado)
+
+    print(meusitens)
+    return render_template('meusitens.html', lista = meusitens)
 
 if __name__ == '__main__':
     app.run()

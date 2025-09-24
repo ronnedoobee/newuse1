@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meus Itens</title>
+    <link rel="stylesheet" href="../static/css/meusitens.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="cabecalho">
+
+        <a href="https://www.google.com" target="_blank">
+            <img src="../static/imagens/MENULATERAL.png" style="margin-left: 1%;">
+        </a>
+        <img src="../static/imagens/NEWUSE1.png" style="margin-left: 10%;">
+
+        <form class="pesquisaform" action="/pesquisar" method="post">
+            <input type="text" id="pesquisa" placeholder="Procurar produto...">
+        </form>
+
+    </div>
+
+    <div class="container-blocos">
+    {% for item in lista %}
+        <div class="itemmeu">
+            
+            <img src="../static/imagens/ropa.png">
+            <div class="texto">
+                <p>{{item[0]}}</p>
+                <a>Preço: R${{item[3]}},00</a>
+            </div>
+
+        </div>
+    {% endfor %}
+    </div>
+
+</body>
+</html>

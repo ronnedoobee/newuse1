@@ -13,8 +13,8 @@ body, html {
 .container-blocos {
   height: 94vh;
   display: grid;
-  justify-content: center; /* centraliza na horizontal */
-  align-content: center;   /* centraliza na vertical */
+  justify-content: center;
+  align-content: center;
 }
 
 .inicio {
@@ -28,7 +28,7 @@ body, html {
     border-radius: 20px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
     color: white;
-    justify-content: center; /* centraliza na horizontal */
+    justify-content: center;
     align-content: center;
 }
 
