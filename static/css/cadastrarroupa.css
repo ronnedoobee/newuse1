@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Adigiana Toybox", sans-serif;
+  font-family: 'Fredoka One', cursive;
 }
 
 body, html {
@@ -10,7 +10,7 @@ body, html {
   width: 100vw;
 }
 
-/* Cabeçalho fixo no topo */
+/
 .cabecalho {
   height: 6vh;
   display: flex;
@@ -22,12 +22,12 @@ body, html {
 
 .grid-blocos {
   display: grid;
-  grid-template-columns: repeat(3, 200px); /* 3 colunas com largura fixa */
-  grid-template-rows: repeat(2, 150px);    /* 2 linhas com altura fixa */
-  gap: 100px;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 150px);
+  gap: 150px;
 }
 
-/* Container dos blocos */
+
 .container-blocos {
   height: 94vh;
   display: flex;
@@ -36,18 +36,19 @@ body, html {
   align-items: center;
 }
 
-/* Cada bloco */
+
 .item-bloco {
-  color: #bbf2f4;
-  background-color: rgb(31, 30, 41);
   display: flex;
+  background-color: #bbf2f4;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: solid 5px;
+  color: rgb(31, 30, 41);
+  border: solid 5px #bbf2f4;
   border-radius: 10px;
-  width: 250px;
-  height: 200px;
+  width: 300px;
+  height: 250px;
   padding: 10px;
-
+  font-size: 23px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
 }

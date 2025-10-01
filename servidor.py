@@ -29,6 +29,7 @@ def cadastro_calcado():
         numeracao = request.form.get('numeracao')
         preco = request.form.get('preco')
         descricao = request.form.get('descricao')
+        genero = request.form.get('genero')
 
         if nome == None or nome == '' or preco == None or preco == '':
     
@@ -37,7 +38,7 @@ def cadastro_calcado():
             return render_template('cadastrarcalcado.html', erro = msg)
 
 
-        calcado = [nome, categoria, numeracao, preco, descricao, nomevendedor]
+        calcado = [nome, categoria, numeracao, preco, descricao, nomevendedor, genero]
 
         
         calcados.append(calcado)
@@ -140,6 +141,8 @@ def cadastro_roupa():
         tamanho = request.form.get('tamanho')
         preco = request.form.get('preco')
         descricao = request.form.get('descricao')
+        genero = request.form.get('genero')
+
         global roupas
 
         if nome == None or preco == None:
@@ -148,7 +151,7 @@ def cadastro_roupa():
             print(roupas)
             return render_template('cadastrarroupa.html', erro = msg)
 
-        roupa = [nome, categoria, tamanho, preco, descricao, nomevendedor]
+        roupa = [nome, categoria, tamanho, preco, descricao, nomevendedor, genero]
 
         roupas.append(roupa)
         msg = "Roupa cadastrada com sucesso!"
@@ -185,6 +188,19 @@ def meus_itens():
 
     print(meusitens)
     return render_template('meusitens.html', lista = meusitens)
+
+@app.route('/detalhes')
+def detalhes_itens():
+    vendedor = request.values.get('vendedor')
+    nome = request.values.get('nome')
+    item = None
+
+    for roupa in roupas:
+        if roupa[0] == nome and roupa[5] == vendedor:
+            item = roupa
+            break
+
+    return render_template('detalhesroupa.html', roupa=item)
 
 if __name__ == '__main__':
     app.run()

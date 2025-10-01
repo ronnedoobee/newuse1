@@ -10,7 +10,7 @@ body, html {
   width: 100vw;
 }
 
-/* CabeĆ§alho fixo no topo */
+
 .cabecalho {
   height: 6vh;
   display: flex;
@@ -22,8 +22,8 @@ body, html {
 
 .grid-blocos {
   display: grid;
-  grid-template-columns: repeat(3, 200px); /* 3 colunas com largura fixa */
-  grid-template-rows: repeat(2, 150px);    /* 2 linhas com altura fixa */
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(2, 150px);
   gap: 150px;
 }
 
@@ -31,11 +31,11 @@ body, html {
 .container-blocos {
   height: 94vh;
   display: grid;
-  justify-content: center; /* centraliza na horizontal */
-  align-content: center;   /* centraliza na vertical */
+  justify-content: center;
+  align-content: center;
 }
 
-/* Cada bloco */
+
 .item-bloco {
   display: flex;
   background-color: #bbf2f4;
