@@ -10,18 +10,26 @@ logado = False
 cliente = False
 vendedor = False
 nomevendedor = ""
+id = 0
 
 
 
 @app.route('/')
 def pag_principal():
-    return render_template('paginainicial.html')
+
+    itens_venda = []
+    for roupa in roupas:
+        itens_venda.append(roupa)
+
+    for calcado in calcados:
+        itens_venda.append(calcado)
+
+    return render_template('paginainicial.html', itens = itens_venda)
 
 @app.route('/cadastrarcalcado', methods=['post'])
 def cadastro_calcado():
 
-    global calcados
-
+    global calcados, id
     if  logado and vendedor:
 
         nome = request.form.get('nomecalcado')
@@ -31,14 +39,15 @@ def cadastro_calcado():
         descricao = request.form.get('descricao')
         genero = request.form.get('genero')
 
+
         if nome == None or nome == '' or preco == None or preco == '':
     
             msg = 'Preencha todos os campos!'
             print(calcados)
             return render_template('cadastrarcalcado.html', erro = msg)
 
-
-        calcado = [nome, categoria, numeracao, preco, descricao, nomevendedor, genero]
+        id += 1
+        calcado = [nome, categoria, numeracao, preco, descricao, nomevendedor, genero, id]
 
         
         calcados.append(calcado)
@@ -143,7 +152,7 @@ def cadastro_roupa():
         descricao = request.form.get('descricao')
         genero = request.form.get('genero')
 
-        global roupas
+        global roupas, id
 
         if nome == None or preco == None:
     
@@ -151,7 +160,8 @@ def cadastro_roupa():
             print(roupas)
             return render_template('cadastrarroupa.html', erro = msg)
 
-        roupa = [nome, categoria, tamanho, preco, descricao, nomevendedor, genero]
+        id += 1
+        roupa = [ nome, categoria, tamanho, preco, descricao, nomevendedor, genero, id]
 
         roupas.append(roupa)
         msg = "Roupa cadastrada com sucesso!"
@@ -201,6 +211,38 @@ def detalhes_itens():
             break
 
     return render_template('detalhesroupa.html', roupa=item)
+
+@app.route('/remover', methods = ['post'])
+def remover_item():
+    idroupa = request.form.get('id')
+    global roupas, calcados
+
+    for roupa in roupas:
+        if idroupa == str(roupa[7]):
+            roupas.remove(roupa)
+            break
+
+    for calcado in calcados:
+        if idroupa == str(calcado[7]):
+            calcados.remove(calcado)
+            break
+
+    print(roupas)
+
+    meusitens = []
+
+    for roupa in roupas:
+        if roupa[5] == nomevendedor:
+            meusitens.append(roupa)
+
+    for calcado in calcados:
+        if calcado[5] == nomevendedor:
+            meusitens.append(calcado)
+
+    print(meusitens)
+    return render_template('meusitens.html', lista=meusitens)
+
+
 
 if __name__ == '__main__':
     app.run()

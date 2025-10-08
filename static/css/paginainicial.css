@@ -36,3 +36,15 @@ body, html {
   outline: none;
   margin-left: 130%;
 }
+
+.primeira_exibicao{
+    width: 15vw;
+    height: 13vh;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+}
+
+.primeira_exibicao img {
+    width: 10px;
+    height: 10px;
+}

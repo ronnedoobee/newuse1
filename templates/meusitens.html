@@ -22,6 +22,9 @@
         </form>
 
     </div>
+    <a href="/cadastraritem"> < Cadastrar Item</a>
+
+
 
     <div class="container-blocos">
     {% for item in lista %}
@@ -30,8 +33,15 @@
             <img src="../static/imagens/ropa.png">
             <div class="texto">
                 <p>{{item[0]}}</p>
+                <a>ID: {{item[7]}}</a>
                 <a>Preço: R${{item[3]}},00</a>
                 <a href="/detalhes?nome={{item[0]}}&vendedor={{item[5]}}">Mais detalhes do item</a>
+                <form action="/remover" method="POST">
+                    <input type="hidden" name="id" value="{{item[7]}}">
+                    <button type="submit">Remover</button>
+                </form>
+
+
             </div>
 
 
