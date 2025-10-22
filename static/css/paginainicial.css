@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: sans-serif;
 }
 
@@ -12,30 +11,28 @@ body, html {
 
 .cabecalho {
     height: 6vh;
+    width: 100vw;
     display: flex;
     background-color: rgb(31, 30, 41);
     align-items: center;
+    padding: 0 20%;
+    gap: 20px;
 }
 
-.cabecalho img{
+.cabecalho img {
     height: 50%;
 }
 
-.cabecalho a{
-    margin-left: 1%;
-    margin-top: 1.5%;
-    height: 100%;
+.cabecalho input {
+
+    width: 170%;
+    padding: 10px 25px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    outline: none;
 }
 
-#pesquisa {
-  width: 300%;
-  padding: 15px 20px;
-  font-size: 18px;
-  border: 2px solid #ccc;
-  border-radius: 30px;
-  outline: none;
-  margin-left: 130%;
-}
 
 .primeira_exibicao{
     width: 15vw;
