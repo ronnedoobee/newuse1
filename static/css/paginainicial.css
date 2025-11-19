@@ -11,7 +11,7 @@ body, html {
 
 .cabecalho {
     height: 6vh;
-    width: 100vw;
+    width: 100dw;
     display: flex;
     background-color: rgb(31, 30, 41);
     align-items: center;
@@ -25,23 +25,112 @@ body, html {
 
 .cabecalho input {
 
-    width: 170%;
+    width: 270px;
     padding: 10px 25px;
     font-size: 16px;
     border: 2px solid #ccc;
     border-radius: 30px;
     outline: none;
 }
-
+.banner img{
+    width: 700px;
+    height: 200px;
+    margin-left: 600px;
+    margin-top: 100px;
+}
 
 .primeira_exibicao{
+    margin-left: 440px;
+    margin-top: 50px;
+    display: flex;
     width: 15vw;
     height: 13vh;
     border: 2px solid #ccc;
     border-radius: 30px;
 }
 
-.primeira_exibicao img {
-    width: 10px;
-    height: 10px;
+.perfil_imagem{
+    margin-left: 800px;
+}
+
+.minha_conta{
+    color: white;
+}
+
+.item_maior{
+    display: flex;
+}
+
+.item_maior img{
+    width: 350px;
+    height: 350px;
+}
+
+.descricao_item_um {
+    padding: 20px;
+    margin-right: 35px;
+}
+
+.descricao_item_um p{
+    max-width: 250px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.descricao_item_um a{
+    font-size: 20px;
+}
+
+.botao_compra{
+    margin-top: 30px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    background-color: rgb(31, 30, 41);
+}
+
+.botao_compra a{
+    font-size: 20px;
+    color: white;
+}
+
+.item_org {
+    display: flex;
+}
+
+.itens_menores img{
+    height: 150px;
+    width: 150px;
+    display: flex;
+}
+
+.descricao_item_menor {
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.descricao_item_menor p{
+    max-width: 175px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.descricao_item_menor a{
+    font-size: 15px;
+}
+
+.botao_compra_menor{
+    width: 150px;
+    margin-top: 10px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    background-color: rgb(31, 30, 41);
+}
+
+.botao_compra_menor a{
+    font-size: 15px;
+    color: white;
 }

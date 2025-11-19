@@ -1,6 +1,10 @@
 from flask import *
+from utils.auxiliares import *
+
 
 app = Flask(__name__)
+
+app.secret_key = 'KJH#45K45JHQASs'
 
 roupas = []
 calcados = []
@@ -30,33 +34,26 @@ def pag_principal():
 def cadastro_calcado():
 
     global calcados, id
-    if  logado and vendedor:
 
-        nome = request.form.get('nomecalcado')
-        categoria = request.form.get('categoria')
-        numeracao = request.form.get('numeracao')
-        preco = request.form.get('preco')
-        descricao = request.form.get('descricao')
-        genero = request.form.get('genero')
+    if not session.get('logado') or session.get('tipo') != 'vendedor':
+        return render_template('login.html')
+
+    nome = request.form.get('nomecalcado')
+    categoria = request.form.get('categoria')
+    numeracao = request.form.get('numeracao')
+    preco = request.form.get('preco')
+    descricao = request.form.get('descricao')
+    genero = request.form.get('genero')
 
 
-        if nome == None or nome == '' or preco == None or preco == '':
-    
-            msg = 'Preencha todos os campos!'
-            print(calcados)
-            return render_template('cadastrarcalcado.html', erro = msg)
-
-        id += 1
-        calcado = [nome, categoria, numeracao, preco, descricao, nomevendedor, genero, id]
-
-        
-        calcados.append(calcado)
-
-        feedback = 'Calçado cadastrado com sucesso!'
+    if not cadastrar_calcado(nome, categoria, numeracao, preco, descricao, nomevendedor, genero, id, calcados):
+        msg = 'Preencha todos os campos!'
         print(calcados)
-        return render_template('cadastrarcalcado.html', retorno = feedback)
-    
-    else: return render_template('login.html')
+        return render_template('cadastrarcalcado.html', erro = msg)
+
+    feedback = 'Calçado cadastrado com sucesso!'
+    print(calcados)
+    return render_template('cadastrarcalcado.html', retorno = feedback)
 
 @app.route('/cadastro')
 def cadastro():
@@ -73,36 +70,14 @@ def cadastrar():
 
     global vendedores, clientes
 
-    if tipouser == 'vendedor':
-        for vendedor in vendedores:
-            if usuario == vendedor[0]:
-                repetido = True
-
-        if repetido:
+    if not cadastro_usuario(usuario, senha, tipouser, vendedores, clientes):
             msg = "Usuário já existe."
-            return render_template('cadastrousuario.html', saida=msg)
+            return render_template('cadastrousuario.html', saida = msg)
 
-        else:
-            vendedores.append(login)
-            msg = 'Usuário cadastrado com sucesso!'
-
-        print(vendedores)
-        return render_template('cadastrousuario.html', saida = msg)
-
-    else:
-        for cliente in clientes:
-            if usuario == cliente[0]:
-                repetido = True
-
-        if repetido:
-            msg = "Usuário já existe."
-            return render_template('cadastrousuario.html', saida=msg)
-
-        else:
-            clientes.append(login)
-            msg = 'Usuário cadastrado com sucesso!'
-        print(clientes)
-        return render_template('cadastrousuario.html', saida = msg)
+    print(vendedores)
+    print(clientes)
+    msg = 'Usuário cadastrado com sucesso!'
+    return render_template('cadastrousuario.html', saida = msg)
 
 
 @app.route('/login')
@@ -114,60 +89,56 @@ def logar ():
     usuario = request.form.get('usuario')
     senha = request.form.get('senha')
     global logado, cliente, vendedor, nomevendedor
-    for cliente in clientes:
-        if usuario == cliente[0] and senha == cliente[1]:
-            logado = True
-            cliente = True
-            vendedor = False
-            return render_template('paginainicial.html')
+
+    if logar_cliente(usuario, senha, clientes):
+        session['usuario'] = usuario
+        session['tipo'] = "cliente"
+        session['logado'] = True
+
+        return render_template('paginainicial.html', usuario=usuario)
         
-    for vendedor in vendedores:
-        if usuario == vendedor[0] and senha == vendedor[1]:
-            logado = True
-            vendedor = True
-            cliente = False
-            nomevendedor = usuario
-            return render_template('paginainicial.html')
+    if logar_vendedor(usuario, senha, vendedores):
+        session['usuario'] = usuario
+        session['tipo'] = "vendedor"
+        session['logado'] = True
+        nomevendedor = usuario
+        return render_template('paginainicial.html', usuario=usuario)
 
     msg = 'Usuário ou senha incorretos'
     return render_template('login.html', erro = msg)
 
 @app.route('/cadastraritem')
 def cadastro_item():
-    
-    if logado and vendedor:
 
-        return render_template('cadastraritem.html')
-    
-    else: return render_template('login.html')
+    if not session.get('logado') or session.get('tipo') != 'vendedor':
+        return render_template('login.html')
+
+    return render_template('cadastraritem.html')
+
 
 @app.route('/cadastrarroupa', methods=['post'])
 def cadastro_roupa():
 
-    if logado and vendedor:
-        nome = request.form.get('nomeroupa')
-        categoria = request.form.get('categoria')
-        tamanho = request.form.get('tamanho')
-        preco = request.form.get('preco')
-        descricao = request.form.get('descricao')
-        genero = request.form.get('genero')
+    if not session.get('logado') or session.get('tipo') != 'vendedor':
+        return render_template('login.html')
 
-        global roupas, id
+    nome = request.form.get('nomeroupa')
+    categoria = request.form.get('categoria')
+    tamanho = request.form.get('tamanho')
+    preco = request.form.get('preco')
+    descricao = request.form.get('descricao')
+    genero = request.form.get('genero')
 
-        if nome == None or preco == None:
-    
-            msg = 'Preencha todos os campos!'
-            print(roupas)
-            return render_template('cadastrarroupa.html', erro = msg)
+    global roupas, id
 
-        id += 1
-        roupa = [ nome, categoria, tamanho, preco, descricao, nomevendedor, genero, id]
-
-        roupas.append(roupa)
-        msg = "Roupa cadastrada com sucesso!"
-
+    if not cadastrar_roupa(nome, categoria, tamanho, preco, descricao, nomevendedor, genero, id, roupas):
+        msg = 'Preencha todos os campos!'
         print(roupas)
-        return render_template('cadastrarroupa.html', retorno = msg)
+        return render_template('cadastrarroupa.html', erro = msg)
+
+    msg = "Roupa cadastrada com sucesso!"
+    print(roupas)
+    return render_template('cadastrarroupa.html', retorno = msg)
 
 
 @app.route('/pesquisar', methods=['post'])
@@ -186,21 +157,24 @@ def pesquisar():
 
 @app.route('/meusitens', methods=['post'])
 def meus_itens():
+
+    if not session.get('logado') or session.get('tipo') != 'vendedor':
+        return render_template('login.html')
+
     meusitens = []
 
-    for roupa in roupas:
-        if roupa[5] == nomevendedor:
-            meusitens.append(roupa)
-
-    for calcado in calcados:
-        if calcado[5] == nomevendedor:
-            meusitens.append(calcado)
+    exibir_itens(nomevendedor, roupas, meusitens)
+    exibir_itens(nomevendedor, calcados, meusitens)
 
     print(meusitens)
     return render_template('meusitens.html', lista = meusitens)
 
 @app.route('/detalhes')
 def detalhes_itens():
+
+    if not session.get('logado') or session.get('tipo') != 'vendedor':
+        return render_template('login.html')
+
     vendedor = request.values.get('vendedor')
     nome = request.values.get('nome')
     item = None
@@ -214,30 +188,20 @@ def detalhes_itens():
 
 @app.route('/remover', methods = ['post'])
 def remover_item():
+
+    if not session.get('logado') or session.get('tipo') != 'vendedor':
+        return render_template('login.html')
+
     idroupa = request.form.get('id')
     global roupas, calcados
 
-    for roupa in roupas:
-        if idroupa == str(roupa[7]):
-            roupas.remove(roupa)
-            break
-
-    for calcado in calcados:
-        if idroupa == str(calcado[7]):
-            calcados.remove(calcado)
-            break
-
-    print(roupas)
+    deletar_item(idroupa, roupas)
+    deletar_item(idroupa, calcados)
 
     meusitens = []
 
-    for roupa in roupas:
-        if roupa[5] == nomevendedor:
-            meusitens.append(roupa)
-
-    for calcado in calcados:
-        if calcado[5] == nomevendedor:
-            meusitens.append(calcado)
+    exibir_itens(nomevendedor, roupas, meusitens)
+    exibir_itens(nomevendedor, calcados, meusitens)
 
     print(meusitens)
     return render_template('meusitens.html', lista=meusitens)

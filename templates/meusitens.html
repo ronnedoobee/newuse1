@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meus Itens</title>
+    <link rel="stylesheet" href="../static/css/paginainicial.css">
     <link rel="stylesheet" href="../static/css/meusitens.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
@@ -11,17 +12,17 @@
 <body>
 
     <div class="cabecalho">
-
-        <a href="https://www.google.com" target="_blank">
-            <img src="../static/imagens/MENULATERAL.png" style="margin-left: 1%;">
-        </a>
-        <img src="../static/imagens/NEWUSE1.png" style="margin-left: 10%;">
+        <img src="../static/imagens/NEWUSE1.png">
 
         <form class="pesquisaform" action="/pesquisar" method="post">
-            <input type="text" id="pesquisa" placeholder="Procurar produto...">
+            <input type="text" class="pesquisa" placeholder="Procurar produto...">
         </form>
 
+        <img class="perfil_imagem" src="../static/imagens/perfil.png">
+        <a href="/cadastraritem" class="minha_conta">Minha Conta</a>
     </div>
+
+
     <a href="/cadastraritem"> < Cadastrar Item</a>
 
 
