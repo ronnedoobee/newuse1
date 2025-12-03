@@ -36,24 +36,6 @@ def cadastrar_calcado(nome, categoria, numeracao, preco, descricao, nomevendedor
     calcados.append(calcado)
     return True
 
-def cadastro_usuario(usuario, senha, tipo_usuario, vendedores, clientes):
-
-    for vendedor in vendedores:
-        if usuario == vendedor[0]:
-            return False
-
-    for cliente in clientes:
-        if usuario == cliente[0]:
-            return False
-
-    login = [usuario, senha]
-    if tipo_usuario == 'vendedor':
-        vendedores.append(login)
-        return True
-
-    clientes.append(login)
-    return True
-
 def deletar_item(idropa, lista):
     for item in lista:
         if idropa == str(item[7]):

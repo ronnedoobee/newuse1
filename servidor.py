@@ -1,5 +1,8 @@
 from flask import *
 from utils.auxiliares import *
+from dao.banco import init_db, Session
+from dao.usuarioDAO import *
+
 
 
 app = Flask(__name__)
@@ -16,7 +19,15 @@ vendedor = False
 nomevendedor = ""
 id = 0
 
+init_db()
 
+@app.before_request
+def pegar_sessao():
+    g.session = Session()
+
+@app.teardown_appcontext
+def encerrar_sessao(exception=None):
+    Session.remove()
 
 @app.route('/')
 def pag_principal():
@@ -61,24 +72,25 @@ def cadastro():
 
 @app.route('/cadastrar', methods = ['post'])
 def cadastrar():
+    usuario_dao = UsuarioDAO(g.session)
+
     usuario = request.form.get('usuario')
     senha = request.form.get('senha')
     tipouser = request.form.get('tipouser')
-    msg = ''
-    login = [usuario, senha]
-    repetido = False
 
-    global vendedores, clientes
+    novo_usuario = Usuario(usuario, senha, tipouser)
 
-    if not cadastro_usuario(usuario, senha, tipouser, vendedores, clientes):
-            msg = "Usuário já existe."
-            return render_template('cadastrousuario.html', saida = msg)
+    if usuario_dao.buscar_por_usuario(usuario) is None:
+        usuario_dao.criar(novo_usuario)
+        msg = 'Usuário cadastrado com sucesso!'
+        return render_template('cadastrousuario.html', saida=msg)
 
-    print(vendedores)
-    print(clientes)
-    msg = 'Usuário cadastrado com sucesso!'
-    return render_template('cadastrousuario.html', saida = msg)
+    msg = 'Usuário já existe!'
+    return render_template('cadastrousuario.html', saida=msg)
 
+
+    ##msg = 'Usuário já existe!'
+    ##return render_template('cadastrousuario.html', saida=msg)
 
 @app.route('/login')
 def login():
@@ -88,24 +100,15 @@ def login():
 def logar ():
     usuario = request.form.get('usuario')
     senha = request.form.get('senha')
-    global logado, cliente, vendedor, nomevendedor
 
-    if logar_cliente(usuario, senha, clientes):
-        session['usuario'] = usuario
-        session['tipo'] = "cliente"
-        session['logado'] = True
+    usuario_dao = UsuarioDAO(g.session)
 
-        return render_template('paginainicial.html', usuario=usuario)
-        
-    if logar_vendedor(usuario, senha, vendedores):
-        session['usuario'] = usuario
-        session['tipo'] = "vendedor"
-        session['logado'] = True
-        nomevendedor = usuario
-        return render_template('paginainicial.html', usuario=usuario)
+    if usuario_dao.autenticar(usuario, senha) is None:
+        msg = 'Usuário ou senha incorretos'
+        return render_template('login.html', erro=msg)
 
-    msg = 'Usuário ou senha incorretos'
-    return render_template('login.html', erro = msg)
+    return render_template('paginainicial.html', usuario=usuario)
+
 
 @app.route('/cadastraritem')
 def cadastro_item():
