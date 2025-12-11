@@ -2,7 +2,7 @@ from flask import *
 from utils.auxiliares import *
 from dao.banco import init_db, Session
 from dao.usuarioDAO import *
-
+from dao.roupaDAO import *
 
 
 app = Flask(__name__)
@@ -55,9 +55,10 @@ def cadastro_calcado():
     preco = request.form.get('preco')
     descricao = request.form.get('descricao')
     genero = request.form.get('genero')
+    estoque = request.form.get('estoque')
 
 
-    if not cadastrar_calcado(nome, categoria, numeracao, preco, descricao, nomevendedor, genero, id, calcados):
+    if not cadastrar_calcado(nome, categoria, numeracao, preco, descricao, nomevendedor, genero, id, calcados, estoque):
         msg = 'Preencha todos os campos!'
         print(calcados)
         return render_template('cadastrarcalcado.html', erro = msg)
@@ -107,6 +108,7 @@ def logar ():
         msg = 'Usuário ou senha incorretos'
         return render_template('login.html', erro=msg)
 
+    session['usuario'] = usuario_dao.buscar_por_usuario(usuario).tipo
     return render_template('paginainicial.html', usuario=usuario)
 
 
@@ -131,10 +133,9 @@ def cadastro_roupa():
     preco = request.form.get('preco')
     descricao = request.form.get('descricao')
     genero = request.form.get('genero')
+    estoque = request.form.get('estoque')
 
-    global roupas, id
-
-    if not cadastrar_roupa(nome, categoria, tamanho, preco, descricao, nomevendedor, genero, id, roupas):
+    if not cadastrar_roupa(nome, categoria, tamanho, preco, descricao, nomevendedor, genero, id, roupas, estoque):
         msg = 'Preencha todos os campos!'
         print(roupas)
         return render_template('cadastrarroupa.html', erro = msg)
