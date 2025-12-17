@@ -1,53 +1,41 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meus Itens</title>
-    <link rel="stylesheet" href="../static/css/paginainicial.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/meusitens.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
-    <div class="cabecalho">
-        <img src="../static/imagens/NEWUSE1.png">
+    <h1>Meus Itens Cadastrados</h1>
+    <a href="/cadastraritem">Voltar</a>
 
-        <form class="pesquisaform" action="/pesquisar" method="post">
-            <input type="text" class="pesquisa" placeholder="Procurar produto...">
-        </form>
+    <div class="lista-itens">
 
-        <img class="perfil_imagem" src="../static/imagens/perfil.png">
-        <a href="/cadastraritem" class="minha_conta">Minha Conta</a>
-    </div>
+        {% for item in lista %}
+        <div class="item">
+            <p><strong>Nome:</strong> {{ item.nome }}</p>
+            <p><strong>Categoria:</strong> {{ item.categoria }}</p>
+            <p><strong>Tamanho:</strong> {{ item.tamanho }}</p>
+            <p><strong>Preço:</strong> R$ {{ item.preco }}</p>
+            <p><strong>Estoque:</strong> {{ item.estoque }}</p>
+            <p><strong>ID:</strong> {{ item.id }}</p>
 
-
-    <a href="/cadastraritem"> < Cadastrar Item</a>
-
-
-
-    <div class="container-blocos">
-    {% for item in lista %}
-        <div class="itemmeu">
-            
-            <img src="../static/imagens/ropa.png">
-            <div class="texto">
-                <p>{{item[0]}}</p>
-                <a>ID: {{item[7]}}</a>
-                <a>Preço: R${{item[3]}},00</a>
-                <a href="/detalhes?nome={{item[0]}}&vendedor={{item[5]}}">Mais detalhes do item</a>
-                <form action="/remover" method="POST">
-                    <input type="hidden" name="id" value="{{item[7]}}">
-                    <button type="submit">Remover</button>
-                </form>
-
-
-            </div>
-
+            <form method="get" action="/detalhes">
+                <input type="hidden" name="id" value="{{ item.id }}">
+                <input type="hidden" name="tipo" value="{{ item.tipo }}">
+                <button type="submit">Detalhes</button>
+            </form>
 
         </div>
-    {% endfor %}
+        {% endfor %}
+
+        {% if lista|length == 0 %}
+            <p>Você ainda não cadastrou nenhum item.</p>
+        {% endif %}
+
     </div>
 
 </body>

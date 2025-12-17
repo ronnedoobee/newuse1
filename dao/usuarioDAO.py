@@ -23,3 +23,11 @@ class UsuarioDAO:
         if user and user.senha == senha:
             return user
         return None
+
+    def verificar_vendedor(self, login):
+        usuario = self.session.query(Usuario).filter_by(login= login).first()
+        if usuario.tipo == 'vendedor':
+            return True
+        return False
+
+

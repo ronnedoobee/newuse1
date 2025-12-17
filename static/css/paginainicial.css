@@ -2,135 +2,182 @@
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
-body, html {
-  height: 100vh;
-  width: 100vw;
+body {
+  background-color: #f4f4f4;
 }
 
 .cabecalho {
-    height: 6vh;
-    width: 100dw;
-    display: flex;
-    background-color: rgb(31, 30, 41);
-    align-items: center;
-    padding: 0 20%;
-    gap: 20px;
+  width: 100%;
+  height: 70px;
+  background-color: rgb(31, 30, 41);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
 }
 
 .cabecalho img {
-    height: 50%;
+  height: 40px;
 }
 
-.cabecalho input {
-
-    width: 270px;
-    padding: 10px 25px;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    outline: none;
-}
-.banner img{
-    width: 700px;
-    height: 200px;
-    margin-left: 600px;
-    margin-top: 100px;
+.pesquisaform {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
-.primeira_exibicao{
-    margin-left: 440px;
-    margin-top: 50px;
-    display: flex;
-    width: 15vw;
-    height: 13vh;
-    border: 2px solid #ccc;
-    border-radius: 30px;
+.pesquisa {
+  width: 300px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
 }
 
-.perfil_imagem{
-    margin-left: 800px;
+.perfil_imagem {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-left: 20px;
 }
 
-.minha_conta{
-    color: white;
+.minha_conta {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
 }
 
-.item_maior{
-    display: flex;
+.banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
 }
 
-.item_maior img{
-    width: 350px;
-    height: 350px;
+.banner img {
+  width: 80%;
+  max-width: 800px;
+  height: auto;
+}
+
+.primeira_exibicao {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  gap: 30px;
+}
+
+.item_maior {
+  flex: 2;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  padding: 20px;
+}
+
+.item_maior img {
+  width: 300px;
+  height: 300px;
 }
 
 .descricao_item_um {
-    padding: 20px;
-    margin-right: 35px;
+  margin-left: 20px;
 }
 
-.descricao_item_um p{
-    max-width: 250px;
-    font-family: 'Fredoka One', cursive;
-    font-size: 30px;
-    margin-bottom: 30px;
+.descricao_item_um p {
+  font-size: 26px;
+  margin-bottom: 20px;
 }
 
-.descricao_item_um a{
-    font-size: 20px;
+.descricao_item_um a {
+  font-size: 20px;
 }
 
-.botao_compra{
-    margin-top: 30px;
-    text-align: center;
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    background-color: rgb(31, 30, 41);
+.botao_compra {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgb(31, 30, 41);
+  border-radius: 30px;
+  text-align: center;
 }
 
-.botao_compra a{
-    font-size: 20px;
-    color: white;
+.botao_compra a {
+  color: white;
+  text-decoration: none;
+}
+
+.itens_menores {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .item_org {
-    display: flex;
+  background-color: white;
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
 }
 
-.itens_menores img{
-    height: 150px;
-    width: 150px;
-    display: flex;
+.item_org img {
+  width: 120px;
+  height: 120px;
 }
 
 .descricao_item_menor {
-    margin-left: 20px;
-    padding: 10px;
+  margin-left: 15px;
 }
 
-.descricao_item_menor p{
-    max-width: 175px;
-    font-family: 'Fredoka One', cursive;
-    font-size: 15px;
-    margin-bottom: 5px;
+.descricao_item_menor p {
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
-.descricao_item_menor a{
-    font-size: 15px;
+.botao_compra_menor {
+  margin-top: 10px;
+  padding: 8px;
+  background-color: rgb(31, 30, 41);
+  border-radius: 30px;
+  text-align: center;
 }
 
-.botao_compra_menor{
-    width: 150px;
-    margin-top: 10px;
+.botao_compra_menor a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* ================= RESPONSIVO ================= */
+@media (max-width: 900px) {
+  .primeira_exibicao {
+    flex-direction: column;
+  }
+
+  .item_maior {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    background-color: rgb(31, 30, 41);
+  }
+
+  .item_maior img {
+    margin-bottom: 20px;
+  }
 }
 
-.botao_compra_menor a{
-    font-size: 15px;
-    color: white;
+@media (max-width: 600px) {
+  .cabecalho {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .pesquisa {
+    width: 100%;
+  }
 }

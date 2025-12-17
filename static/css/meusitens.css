@@ -1,63 +1,52 @@
-body, html {
-  height: 100vh;
-  width: 100vw;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fredoka One', cursive;
 }
 
-.cabecalho {
-  height: 6vh;
-  display: flex;
-  background-color: rgb(31, 30, 41);
-  align-items: center;
-  padding: 0 20px;
+body {
+  background-color: rgb(68, 103, 196);
+  padding: 30px;
   color: white;
 }
 
-.cabecalho img{
-    height: 50%;
+h1 {
+  margin-bottom: 10px;
 }
 
-.cabecalho a{
-    margin-left: 1%;
-    margin-top: 1.5%;
-    height: 100%;
+a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 20px;
 }
 
-#pesquisa {
-  width: 300%;
-  padding: 15px 20px;
-  font-size: 18px;
-  border: 2px solid #ccc;
-  border-radius: 30px;
-  outline: none;
-  margin-left: 130%;
+.lista-itens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.itemmeu {
-    width:400px;
-    height:200px;
-    border: solid 15px #bbf2f4;
-    border-radius: 20px;
-    display: flex;
-    gap: 20px;
-    margin: 20px;
-
+.item {
+  background-color: white;
+  color: #333;
+  padding: 20px;
+  border-radius: 20px;
+  width: 260px;
 }
 
-.itemmeu img{
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-right: 20px;
-    width: 150px;
-    height: 150px;
+.item p {
+  margin-bottom: 6px;
 }
 
-.texto {
-    margin-top: 25px;
-    width: 150px;
-    height: 150px;
-    display: grid;
-}
-
-.texto p{
-    font-size: 30px;
+.item button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(31, 30, 41);
+  color: white;
+  cursor: pointer;
 }

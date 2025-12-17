@@ -3,6 +3,7 @@ from utils.auxiliares import *
 from dao.banco import init_db, Session
 from dao.usuarioDAO import *
 from dao.roupaDAO import *
+from dao.calcadoDAO import *
 
 
 app = Flask(__name__)
@@ -13,11 +14,6 @@ roupas = []
 calcados = []
 vendedores = [['rome', '123']]
 clientes = []
-logado = False
-cliente = False
-vendedor = False
-nomevendedor = ""
-id = 0
 
 init_db()
 
@@ -41,31 +37,27 @@ def pag_principal():
 
     return render_template('paginainicial.html', itens = itens_venda)
 
-@app.route('/cadastrarcalcado', methods=['post'])
-def cadastro_calcado():
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
-    global calcados, id
+@app.route('/logar', methods=['post'])
+def logar ():
+    usuario = request.form.get('usuario')
+    senha = request.form.get('senha')
 
-    if not session.get('logado') or session.get('tipo') != 'vendedor':
-        return render_template('login.html')
+    usuario_dao = UsuarioDAO(g.session)
 
-    nome = request.form.get('nomecalcado')
-    categoria = request.form.get('categoria')
-    numeracao = request.form.get('numeracao')
-    preco = request.form.get('preco')
-    descricao = request.form.get('descricao')
-    genero = request.form.get('genero')
-    estoque = request.form.get('estoque')
+    if usuario_dao.autenticar(usuario, senha) is None:
+        msg = 'Usuário ou senha incorretos'
+        return render_template('login.html', erro=msg)
 
+    session['logado'] = True
+    session['usuario'] = usuario
+    session['vendedor'] = usuario_dao.verificar_vendedor(usuario)
 
-    if not cadastrar_calcado(nome, categoria, numeracao, preco, descricao, nomevendedor, genero, id, calcados, estoque):
-        msg = 'Preencha todos os campos!'
-        print(calcados)
-        return render_template('cadastrarcalcado.html', erro = msg)
-
-    feedback = 'Calçado cadastrado com sucesso!'
-    print(calcados)
-    return render_template('cadastrarcalcado.html', retorno = feedback)
+    print(session.get('usuario'))
+    return render_template('paginainicial.html', usuario=usuario)
 
 @app.route('/cadastro')
 def cadastro():
@@ -89,42 +81,44 @@ def cadastrar():
     msg = 'Usuário já existe!'
     return render_template('cadastrousuario.html', saida=msg)
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return render_template('paginainicial.html')
 
-    ##msg = 'Usuário já existe!'
-    ##return render_template('cadastrousuario.html', saida=msg)
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/logar', methods=['post'])
-def logar ():
-    usuario = request.form.get('usuario')
-    senha = request.form.get('senha')
-
+@app.route('/meuperfil')
+def meu_perfil():
     usuario_dao = UsuarioDAO(g.session)
+    usuario = usuario_dao.buscar_por_usuario(session.get('usuario'))
+    if not session.get('logado'):
+        return render_template('login.html')
 
-    if usuario_dao.autenticar(usuario, senha) is None:
-        msg = 'Usuário ou senha incorretos'
-        return render_template('login.html', erro=msg)
+    if not session.get('vendedor'):
+        return render_template('meu-perfil-cliente.html', usuario = usuario)
 
-    session['usuario'] = usuario_dao.buscar_por_usuario(usuario).tipo
-    return render_template('paginainicial.html', usuario=usuario)
+    return render_template('meu-perfil-vendedor.html', usuario = usuario)
 
 
 @app.route('/cadastraritem')
 def cadastro_item():
 
-    if not session.get('logado') or session.get('tipo') != 'vendedor':
-        return render_template('login.html')
+    usuario_dao = UsuarioDAO(g.session)
+
+    if not session.get('logado') or not session.get('vendedor'):
+        return redirect(url_for('login'))
 
     return render_template('cadastraritem.html')
 
-
-@app.route('/cadastrarroupa', methods=['post'])
+@app.route('/cadastrarroupa', methods=['GET', 'POST'])
 def cadastro_roupa():
 
-    if not session.get('logado') or session.get('tipo') != 'vendedor':
+    if request.method == 'GET':
+        return render_template('cadastrarroupa.html')
+
+    roupa_dao = RoupaDAO(g.session)
+
+    if not session.get('logado') or not session.get('vendedor'):
         return render_template('login.html')
 
     nome = request.form.get('nomeroupa')
@@ -132,84 +126,81 @@ def cadastro_roupa():
     tamanho = request.form.get('tamanho')
     preco = request.form.get('preco')
     descricao = request.form.get('descricao')
+    nomevendedor = session.get('usuario')
     genero = request.form.get('genero')
     estoque = request.form.get('estoque')
 
-    if not cadastrar_roupa(nome, categoria, tamanho, preco, descricao, nomevendedor, genero, id, roupas, estoque):
-        msg = 'Preencha todos os campos!'
-        print(roupas)
-        return render_template('cadastrarroupa.html', erro = msg)
-
+    roupa = Roupa(nome, categoria, tamanho, preco, descricao, nomevendedor, genero, estoque)
+    roupa_dao.criar(roupa)
     msg = "Roupa cadastrada com sucesso!"
-    print(roupas)
-    return render_template('cadastrarroupa.html', retorno = msg)
+    return render_template("cadastrarroupa.html", msg = msg)
 
 
-@app.route('/pesquisar', methods=['post'])
-def pesquisar():
-    pesquisas = []
-    pesquisar = request.form.get('pesquisar')
-    if pesquisar:
-        for roupa in roupas:
-            if pesquisar.lower() == roupa[0].lower():
-                pesquisas.append(roupa)
-        for calcado in calcados:
-            if pesquisar.lower() == calcado[0].lower():
-                pesquisas.append(calcado)
-    print(f"Resultados: {pesquisas}")
-    return render_template('pesquisa.html', lista = pesquisas)
+@app.route('/cadastrarcalcado', methods=['GET', 'POST'])
+def cadastro_calcado():
 
-@app.route('/meusitens', methods=['post'])
-def meus_itens():
+    if request.method == 'GET':
+        return render_template('cadastrarcalcado.html')
 
-    if not session.get('logado') or session.get('tipo') != 'vendedor':
+    calcado_dao = CalcadoDAO(g.session)
+
+    if not session.get('logado') or not session.get('vendedor'):
         return render_template('login.html')
 
-    meusitens = []
+    nome = request.form.get('nomecalcado')
+    categoria = request.form.get('categoria')
+    numeracao = request.form.get('numeracao')
+    preco = request.form.get('preco')
+    descricao = request.form.get('descricao')
+    nomevendedor = session.get('usuario')
+    genero = request.form.get('genero')
+    estoque = request.form.get('estoque')
 
-    exibir_itens(nomevendedor, roupas, meusitens)
-    exibir_itens(nomevendedor, calcados, meusitens)
+    calcado = Calcado(nome, categoria, numeracao, preco, descricao, nomevendedor, genero, estoque)
+    calcado_dao.criar(calcado)
+    msg = "Calçado cadastrada com sucesso!"
+    return render_template("cadastrarcalcado.html", msg = msg)
 
-    print(meusitens)
-    return render_template('meusitens.html', lista = meusitens)
+
+@app.route('/meusitens')
+def meus_itens():
+    roupa_dao = RoupaDAO(g.session)
+    calcado_dao = CalcadoDAO(g.session)
+    if not session.get('logado') or not session.get('vendedor'):
+        return render_template('login.html')
+
+    roupas = roupa_dao.listar_por_vendedor(session.get('usuario'))
+    calcados = calcado_dao.listar_por_vendedor(session.get('usuario'))
+
+    for roupa in roupas:
+        roupa.tipo = "roupa"
+
+    for calcado in calcados:
+        calcado.tipo = "calcado"
+
+    lista = roupas + calcados
+
+    return render_template('meusitens.html', lista=lista)
+
 
 @app.route('/detalhes')
 def detalhes_itens():
 
-    if not session.get('logado') or session.get('tipo') != 'vendedor':
+    if not session.get('logado') or not session.get('vendedor'):
         return render_template('login.html')
 
-    vendedor = request.values.get('vendedor')
-    nome = request.values.get('nome')
-    item = None
+    tipo = request.args.get('tipo')
+    id_item = request.args.get('id')
 
-    for roupa in roupas:
-        if roupa[0] == nome and roupa[5] == vendedor:
-            item = roupa
-            break
+    if tipo == "roupa":
+        dao = RoupaDAO(g.session)
 
-    return render_template('detalhesroupa.html', roupa=item)
+    elif tipo == "calcado":
+        dao = CalcadoDAO(g.session)
 
-@app.route('/remover', methods = ['post'])
-def remover_item():
+    item = dao.buscar_por_id(id_item)
 
-    if not session.get('logado') or session.get('tipo') != 'vendedor':
-        return render_template('login.html')
-
-    idroupa = request.form.get('id')
-    global roupas, calcados
-
-    deletar_item(idroupa, roupas)
-    deletar_item(idroupa, calcados)
-
-    meusitens = []
-
-    exibir_itens(nomevendedor, roupas, meusitens)
-    exibir_itens(nomevendedor, calcados, meusitens)
-
-    print(meusitens)
-    return render_template('meusitens.html', lista=meusitens)
-
+    return render_template("detalhes.html", item = item, tipo = tipo)
 
 
 if __name__ == '__main__':

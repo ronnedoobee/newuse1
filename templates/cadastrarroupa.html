@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Newuse</title>
+    <title>Cadastrar Roupa</title>
+
     <link rel="stylesheet" href="../static/css/paginainicial.css">
     <link rel="stylesheet" href="../static/css/cadastrarroupa.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -18,64 +19,57 @@
         </form>
 
         <img class="perfil_imagem" src="../static/imagens/perfil.png">
-        <a href="" class="minha_conta">Minha Conta</a>
+        <a href="/meuperfil" class="minha_conta">Minha Conta</a>
     </div>
 
-    <a href="/cadastraritem"> < Cadastrar Item</a>
-    <br>
-    <br>
-    <div class="container-blocos">
-        <div class="grid-blocos">
-        <div class="item-bloco">
-            <form action="cadastrarroupa" method="post">
-                <a>Nome da peça: </a>
-                <input name="nomeroupa" type="text" >
-        </div>
-        <div class="item-bloco">
-                <a>Genero:</a>
-                <select id="genero" name="genero">
-                  <option value="masculino">Masculino</option>
-                  <option value="feminino">Feminino</option>
-                  <option value="unisex">Unisex</option>
-                </select>
-        </div>
-        <div class="item-bloco">
-                <a>Categoria:</a>
-                <select id="categoria" name="categoria">
-                  <option value="camisa">Camisa</option>
-                  <option value="calca">Calça</option>
-                  <option value="short">Short</option>
-                  <option value="cueca">Cueca</option>
-                  <option value="calcinha">Calcinha</option>
-                  <option value="moletom">Moletom</option>
-                </select>
-        </div>
-        <div class="item-bloco">
-                <a>Tamanho:</a>
-                    <select id="tamanho" name="tamanho">
-                        <option value="G">G</option>
-                        <option value="M">M</option>
-                        <option value="P">P</option>
-                    </select>
-        </div>
-            
-        <div class="item-bloco">
-                <a>Preço: </a>
-                <input type="number" name="preco">
-        </div>
-                
-        <div class="item-bloco">
-                <a>Descrição: </a>
-                <input type="text" name="descricao" placeholder="Escreva as especificações da roupa...">
-                <button type="submit">Cadastrar roupa</button>
+    <a href="/cadastraritem" class="voltar">← Voltar</a>
 
-            </form>
-            <br>
-            <br>
-            {{erro}}
-            {{retorno}}
-        </div>
-       </div>
+    <div class="container">
+        <h1>Cadastrar nova roupa</h1>
+
+        <form action="/cadastrarroupa" method="post" class="formulario">
+
+            <label>Nome da peça</label>
+            <input type="text" name="nomeroupa" required>
+
+            <label>Gênero</label>
+            <select name="genero">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="unisex">Unissex</option>
+            </select>
+
+            <label>Categoria</label>
+            <select name="categoria">
+                <option value="camisa">Camisa</option>
+                <option value="calca">Calça</option>
+                <option value="short">Short</option>
+                <option value="moletom">Moletom</option>
+            </select>
+
+            <label>Tamanho</label>
+            <select name="tamanho">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+            </select>
+
+            <label>Preço</label>
+            <input type="number" name="preco" step="0.01" required>
+
+            <label>Estoque</label>
+            <input type="number" name="estoque" required>
+
+            <label>Descrição</label>
+            <textarea name="descricao" placeholder="Descreva a roupa..."></textarea>
+
+            <button type="submit">Cadastrar roupa</button>
+
+            {% if msg %}
+                <p class="sucesso">{{ msg }}</p>
+            {% endif %}
+
+        </form>
     </div>
 
 </body>

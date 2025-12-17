@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../static/css/paginainicial.css">
     <link rel="stylesheet" href="../static/css/cadastraritem.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 </head>
 <body>
@@ -18,7 +20,7 @@
         </form>
 
         <img class="perfil_imagem" src="../static/imagens/perfil.png">
-        <a href="" class="minha_conta">Minha Conta</a>
+        <a href="/meuperfil" class="minha_conta">Minha Conta</a>
     </div>
 
     <a href="/"> < Página inicial</a>
@@ -26,14 +28,14 @@
     <br>
     <div class="container-blocos">
     <div class="inicio">
-    <h1 style="text-align: center; margin-bottom: 10px;" >Escolha que tipo de item deseja cadastrar: </h1>
+    <h1 style="text-align: center; margin-bottom: 10px;" >Escolha que tipo de ação deseja realizar: </h1>
     </div>
 
     <div class="corpo">
 
         <div class="item-bloco" style="">
             <h2>Roupa</h2>
-            <form method="post" action="/cadastrarroupa">
+            <form method="get" action="/cadastrarroupa">
                 <img src="../static/imagens/roupaitem.png">
                 <button type="submit">Cadastrar roupa</button>
             </form>
@@ -41,7 +43,7 @@
         </div>
         <div class="item-bloco" style="">
             <h2>Sapato</h2>
-            <form method="post" action="/cadastrarcalcado">
+            <form method="get" action="/cadastrarcalcado">
                 <img src="../static/imagens/tenisitem.png">
                 <button formaction="/cadastrarcalcado" type="submit">Cadastrar calçado</button>
             </form>
@@ -50,7 +52,7 @@
 
         <div class="item-bloco" style="">
             <h2>Meus itens</h2>
-            <form method="post" action="/meusitens">
+            <form method="get" action="/meusitens">
                 <img src="../static/imagens/caixa.png">
                 <button formaction="/meusitens" type="submit">Ver lista</button>
             </form>

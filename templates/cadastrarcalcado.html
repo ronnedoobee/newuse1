@@ -2,12 +2,16 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Newuse</title>
+    <title>Cadastrar Calçado</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/paginainicial.css">
     <link rel="stylesheet" href="../static/css/cadastrarcalcado.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
+
     <div class="cabecalho">
         <img src="../static/imagens/NEWUSE1.png">
 
@@ -16,84 +20,63 @@
         </form>
 
         <img class="perfil_imagem" src="../static/imagens/perfil.png">
-        <a href="" class="minha_conta">Minha Conta</a>
+        <a href="/meuperfil" class="minha_conta">Minha Conta</a>
     </div>
 
-    <a href="/cadastraritem"> < Cadastrar Item</a>
-    <br>
-    <br>
-    <div class="container-blocos">
-        <div class="grid-blocos">
-        <div class="item-bloco">
-            <form action="/cadastrarcalcado" method="post">
-                <a>Nome do calçado: </a>
-                <input name="nomecalcado" type="text" >
-        </div>
+    <a href="/cadastraritem">← Voltar</a>
 
-        <div class="item-bloco">
-                <a>Genero:</a>
-                <select id="genero" name="genero">
-                  <option value="masculino">Masculino</option>
-                  <option value="feminino">Feminino</option>
-                  <option value="unisex">Unisex</option>
-                </select>
-        </div>
+    <div class="container">
+        <h1>Cadastrar Calçado</h1>
 
-        <div class="item-bloco">
-                <a>Categoria:</a>
-                <select id="categoria" name="categoria">
-                   <option value="tenis casual">Tênis Casual</option>
-                   <option value="sapato social">Sapato Social</option>
+        <form action="/cadastrarcalcado" method="post">
 
-                   <optgroup label="Sandália">
-                   <option value="rasteira">Rasteira</option>
-                   <option value="salto">Salto Alto</option>
-                   <option value="plataforma">Plataforma</option>
-                   </optgroup>
+            <label>Nome do calçado:</label>
+            <input type="text" name="nomecalcado" required>
 
-                   <optgroup label="Bota">
-                   <option value="cano-curto">Cano Curto</option>
-                   <option value="cano-medio">Cano Médio</option>
-                   <option value="cano-longo">Cano Longo</option>
-                    </optgroup>
+            <label>Gênero:</label>
+            <select name="genero">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="unisex">Unisex</option>
+            </select>
 
-                   <option value="tenis esportivo">Tênis Esportivo</option>
-                   <option value="sapatilha">Sapatilha</option>
-                   <option value="meia">Meia</option>
-                </select>
-        </div>
+            <label>Categoria:</label>
+            <select name="categoria">
+                <option value="tenis casual">Tênis Casual</option>
+                <option value="sapato social">Sapato Social</option>
+                <option value="tenis esportivo">Tênis Esportivo</option>
+                <option value="bota">Bota</option>
+                <option value="sandalia">Sandália</option>
+            </select>
 
+            <label>Numeração:</label>
+            <select name="numeracao">
+                <option>34</option>
+                <option>35</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+            </select>
 
-        <div class="item-bloco">
-                <a>Numeração:</a>
-                    <select id="numeracao" name="numeracao">
-                        <option value="34">34</option>
-                        <option value="35">35</option>
-                        <option value="36">36</option>
-                        <option value="37">37</option>
-                        <option value="38">38</option>
-                        <option value="39">39</option>
-                        <option value="40">40</option>
-                        <option value="42">41</option>
-                        <option value="42">42</option>
-                    </select>
-        </div>
+            <label>Preço:</label>
+            <input type="number" name="preco" step="0.01" required>
 
-        <div class="item-bloco">
-                <a>Preço: </a>
-                <input type="number" name="preco">
-        </div>
+            <label>Estoque:</label>
+            <input type="number" name="estoque" required>
 
-        <div class="item-bloco">
-                <a>Descrição: </a>
-                <input type="text" name="descricao" placeholder="Escreva as especificações da roupa...">
-                <button type="submit">Cadastrar roupa</button>
+            <label>Descrição:</label>
+            <input type="text" name="descricao" placeholder="Detalhes do calçado">
 
-                {{erro}}
-                {{retorno}}
-            </form>
-        </div>
-       </div>
+            <button type="submit">Cadastrar Calçado</button>
+
+            <p>{{ msg }}</p>
+
+        </form>
     </div>
+
 </body>
 </html>

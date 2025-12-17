@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Perfil - Vendedor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/css/meuperfil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Minha Conta (Vendedor)</h1>
+    <a href="/">Voltar para a página inicial</a>
+
+    <div class="perfil">
+
+        <div class="foto">
+            <img src="../static/imagens/beabadoobeeperfil.png">
+            <p>Foto de perfil</p>
+        </div>
+        <div class="dados">
+            <p><strong>Usuário:</strong> {{ usuario.login }}</p>
+            <p><strong>Tipo:</strong> {{ usuario.tipo }}</p>
+        </div>
+
+    </div>
+
+    <div class="area">
+        <h2>Menu de itens</h2>
+        <p>Área para gerenciar os produtos cadastrados.</p>
+        <br>
+        <a href="/cadastraritem">Acessar menu de itens</a>
+    </div>
+
+    <br>
+    <a href="/logout">Sair da conta</a>
+
+</body>
+</html>

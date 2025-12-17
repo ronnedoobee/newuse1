@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Fredoka One', cursive;
+}
+
+body {
+  background-color: rgb(68, 103, 196);
+  padding: 20px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.container img {
+  width: 250px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.container p {
+  margin: 8px 0;
+}

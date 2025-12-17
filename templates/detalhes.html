@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Item</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/detalhes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <a href="/meusitens">← Voltar</a>
+
+    <div class="container">
+
+        <img src="../static/imagens/camisa_beabadoobee.jpg">
+
+        <h1>{{ item.nome }}</h1>
+
+        <p><strong>Tipo:</strong> {{ tipo }}</p>
+        <p><strong>Categoria:</strong> {{ item.categoria }}</p>
+        <p><strong>Preço:</strong> R$ {{ item.preco }}</p>
+        <p><strong>Estoque:</strong> {{ item.estoque }}</p>
+
+        {% if tipo == "roupa" %}
+            <p><strong>Tamanho:</strong> {{ item.tamanho }}</p>
+        {% else %}
+            <p><strong>Numeração:</strong> {{ item.numeracao }}</p>
+        {% endif %}
+
+        <p>{{ item.descricao }}</p>
+
+    </div>
+
+</body>
+</html>

@@ -1,53 +1,60 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Fredoka One', cursive;
 }
 
-body, html {
-  height: 100vh;
-  width: 100vw;
+body {
+  background-color: rgb(68, 103, 196);
+  color: #333;
 }
 
-
-.cabecalho {
-  height: 6vh;
-  display: flex;
-  background-color: rgb(31, 30, 41);
-  align-items: center;
-  padding: 0 20px;
+a {
   color: white;
+  text-decoration: none;
+  display: inline-block;
+  margin: 15px 0;
 }
 
-.grid-blocos {
-  display: grid;
-  grid-template-columns: repeat(3, 200px);
-  grid-template-rows: repeat(2, 150px);
-  gap: 150px;
+.container {
+  max-width: 500px;
+  background-color: white;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* Container dos blocos */
-.container-blocos {
-  height: 94vh;
-  display: grid;
-  justify-content: center;
-  align-content: center;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-
-.item-bloco {
+form {
   display: flex;
-  background-color: #bbf2f4;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  color: rgb(31, 30, 41);
-  border: solid 5px #bbf2f4;
-  border-radius: 10px;
-  width: 300px;
-  height: 250px;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+input, select {
   padding: 10px;
-  font-size: 23px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(31, 30, 41);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
